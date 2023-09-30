@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:MOVIE.Converters" xmlns:behavior="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="MOVIE.Pages.MovieListView">
+    <ContentPage.Resources>
+        <converters:ImageConverter x:Key="ImageConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label/>
+            <SearchBar x:Name="searchBar" Placeholder="Search by name or genre..." CancelButtonColor="Black" HorizontalOptions="Fill" TextChanged="searchBar_TextChanged"
+                       Text="{Binding OriginalTitle, Mode=TwoWay}"/>
+            <Label x:Name="labelResults" HorizontalTextAlignment="Center"></Label>
+            <ListView HasUnevenRows="True" SeparatorColor="Orange" x:Name="listViewMovies" 
+                     ItemTapped="listViewMovies_ItemTapped"
+                      ItemsSource="{Binding MovieList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" x:Name="Item">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="4" Source="{Binding PosterPath, Converter={StaticResource ImageConverter}}" WidthRequest="120"></Image>
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding OriginalTitle}" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding OverviewFormat}"></Label>
+                                <ImageButton Grid.Column="1" Grid.Row="3"  Grid.ColumnSpan="2" Source="watchlist_button.png" HeightRequest="35" HorizontalOptions="EndAndExpand"
+                                      BindingContext="{Binding Source={x:Reference listViewMovies}, Path=BindingContext}"   Command="{Binding AddCommand}"   
+                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"        
+                                 />
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding GenreFormat}" TextColor="Red" Padding="0,3,0,0"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage> 

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pages="clr-namespace:MOVIE.Pages"
+            x:Class="MOVIE.Pages.TabbedMainPage" BarBackgroundColor="Orange" BarTextColor="Black" SelectedTabColor="White">
+
+    <pages:MovieListView Title="Movies" IconImageSource="list_icon.png" IsEnabled="True"></pages:MovieListView>
+    <pages:WatchListView Title="WatchList" IconImageSource="watchlist_icon.png"></pages:WatchListView>
+    <pages:GraphicMovieView Title="Graphic" IconImageSource="statistics_icon.png"></pages:GraphicMovieView>
+    <pages:HotReleaseView Title="Hot Release" IconImageSource="hot_icon.png"></pages:HotReleaseView>
+    <pages:FAQView Title="FAQ" IconImageSource="faq_icon.png"></pages:FAQView>
+    
+</TabbedPage>

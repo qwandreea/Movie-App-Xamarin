@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MOVIE.Pages.WatchListView">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding watchList, Mode=TwoWay}" x:Name="listViewWatchlist" IsPullToRefreshEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="4" Source="{Binding PosterPath}" WidthRequest="120"></Image>
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding OriginalTitle}" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding ReleaseDate, StringFormat='{0:dd MM, yyyy}'}"></Label>
+                                <ImageButton Grid.Column="1" Grid.Row="3" 
+                                             Grid.ColumnSpan="2" Source="removeWatchlist.png" HeightRequest="35" 
+                                             HorizontalOptions="EndAndExpand" 
+                                             Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference listViewWatchlist}}" CommandParameter="{Binding .}"/>
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Status}" TextColor="Red" Padding="0,3,0,0"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
